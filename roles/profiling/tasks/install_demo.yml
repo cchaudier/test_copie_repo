@@ -1,4 +1,0 @@
----
-- name: Install demo PHP script
-  copy: src=profiling.php dest=/var/www/ mode=0644
-  tags: profiling
