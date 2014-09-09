@@ -1,3 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'serverspec'
+gem 'test-kitchen'
+gem 'serverspec', '2.0.0.beta20'
