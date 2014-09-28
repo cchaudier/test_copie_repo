@@ -1,6 +1,8 @@
 # danjo.yml
 ---
 - hosts: all
+  vars:
+    common_hostname: 'django-server'
   sudo: yes
   roles:
     - common
