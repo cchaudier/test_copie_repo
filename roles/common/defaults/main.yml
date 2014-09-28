@@ -1,0 +1,3 @@
+---
+common_timezone: 'Europe/Paris'
+common_hostname: 'ubuntu-server'
