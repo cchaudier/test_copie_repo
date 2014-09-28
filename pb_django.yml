@@ -1,0 +1,7 @@
+# danjo.yml
+---
+- hosts: all
+  sudo: yes
+  roles:
+    - common
+    - nginx
