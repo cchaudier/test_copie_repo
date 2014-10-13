@@ -1,0 +1,100 @@
+server {
+    listen 0.0.0.0;
+    server_name cosmopolithome.com;
+    server_name www.cosmopolithome.com;
+    rewrite ^ https://www.cosmopolithome.com$request_uri permanent;
+}
+
+server {
+    listen 0.0.0.0;
+    server_name de.cosmopolithome.com;
+    rewrite ^ https://de.cosmopolithome.com$request_uri permanent;
+}
+
+server {
+    listen 0.0.0.0;
+    server_name es.cosmopolithome.com;
+    rewrite ^ https://es.cosmopolithome.com$request_uri permanent;
+}
+
+server {
+    listen 0.0.0.0;
+    server_name fr.cosmopolithome.com;
+    rewrite ^ https://fr.cosmopolithome.com$request_uri permanent;
+}
+
+server {
+    listen 0.0.0.0;
+    server_name it.cosmopolithome.com;
+    rewrite ^ https://it.cosmopolithome.com$request_uri permanent;
+}
+
+server {
+    listen 0.0.0.0;
+    server_name nl.cosmopolithome.com;
+    rewrite ^ https://nl.cosmopolithome.com$request_uri permanent;
+}
+
+server {
+    listen 0.0.0.0;
+    server_name pt.cosmopolithome.com;
+    rewrite ^ https://pt.cosmopolithome.com$request_uri permanent;
+}
+
+server {
+    listen 443 default_server ssl;
+    ssl_certificate      /etc/nginx/certs/cosmopolithome.pem;
+    ssl_certificate_key  /etc/nginx/certs/cosmopolithome.key;
+
+    index index.html;
+
+    access_log /var/log/nginx/cosmopolithome.access.log timed_combined;
+    error_log  /var/log/nginx/cosmopolithome.error.log;
+    log_not_found on;
+
+    sendfile on;
+    send_timeout 300s;
+    keepalive_timeout 5;
+   
+    client_body_in_file_only clean;
+    client_max_body_size 15M;
+    client_body_buffer_size 128k;
+
+    gzip on;
+    gzip_buffers 16 8k;
+    gzip_comp_level 9;
+    gzip_http_version 1.0;
+    gzip_min_length 0;
+    gzip_types text/plain text/css application/x-javascript application/json;
+    gzip_vary on;
+    gzip_disable 'MSIE [1-6].(?!.*SV1)';
+
+    location ^~ /assets/ {
+        root /home/cosmo/cosmo_client/public;
+    }
+
+    location ~ ^/(media|static)/ {
+        root /home/cosmo/cosmo_server/site_media;
+    }
+
+    location ~ ^/(favicon.ico|robots.txt|2862CFB530620E57EBBAFA13474F48AE.txt|googlece3814a7713d4a87.html)$ {
+        root /home/cosmo/cosmo_client/public/assets;
+    }
+
+    location ~ ^/(api|admin)/ {
+        proxy_pass http://django;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Protocol https;
+    }
+
+#    location / {
+#        proxy_pass http://phantomjs;
+#        proxy_set_header Host $http_host;
+#        proxy_set_header X-Real-IP $remote_addr;
+#        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#        proxy_set_header X-Forwarded-Protocol https;
+#        expires -1;
+#    }
+}

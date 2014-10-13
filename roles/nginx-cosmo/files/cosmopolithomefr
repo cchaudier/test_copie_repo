@@ -1,0 +1,6 @@
+server {
+    listen 0.0.0.0;
+    server_name cosmopolithome.fr;
+    server_name www.cosmopolithome.fr;
+    rewrite ^ https://fr.cosmopolithome.com$request_uri permanent;
+}
