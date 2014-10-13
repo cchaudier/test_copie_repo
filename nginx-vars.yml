@@ -14,11 +14,13 @@ nginx_http_params:
   - tcp_nodelay on
   - keepalive_timeout 65
   - types_hash_max_size 2048
+  - access_log "{{nginx_log_dir}}/access.log"
+  - error_log "{{nginx_log_dir}}/error.log"
 
 nginx_sites:
  default:
      - listen 80
-     - server_name _
+     - server_name django_server
      - root "/var/www"
      - index index.html
 
