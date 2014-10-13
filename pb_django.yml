@@ -4,7 +4,9 @@
   vars:
     common_hostname: 'django-server'
   sudo: yes
+  vars_files:
+    - nginx-vars.yml
   roles:
     #- common
-    #- nginx
-    - python-common
+    - nginx
+    #- python-common
