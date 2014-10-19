@@ -1,0 +1,10 @@
+---
+sites:
+  - cosmopolithome
+  - cosmopolithomelang
+  - default
+  - django
+
+base_url: cosmopolithome.com
+media_url: http://media.cosmopolithome.com
+media_url: http://media.cosmopolithome.local

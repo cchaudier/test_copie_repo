@@ -3,7 +3,6 @@
   copy: src={{ item }}  dest=/etc/nginx
   with_items:
     - certs
-    - global
   notify:
    - reload nginx
   tags: [configuration,nginx]
@@ -15,24 +14,16 @@
   tags: [configuration,nginx]
 
 - name: Create the configurations for sites
-  #  template: src=site.conf.j2 dest=/etc/nginx/sites-available/{{ item }}.conf
-  copy: src={{ item }} dest=/etc/nginx/sites-available/{{ item }}.conf
-  with_items: 
-    - cosmopolithome
-    - cosmopolithomelang
-    - default
-    - django
+  template: src=sites-available/{{ item }}.conf.j2 dest=/etc/nginx/sites-available/{{ item }}.conf
+  #copy: src={{ item }} dest=/etc/nginx/sites-available/{{ item }}.conf
+  with_items: sites
   notify:
    - reload nginx
   tags: [configuration,nginx]
 
 - name: Create links for sites-enabled
   file: state=link src=/etc/nginx/sites-available/{{ item }}.conf dest=/etc/nginx/sites-enabled/{{ item }}.conf
-  with_items: 
-    - cosmopolithome
-    - cosmopolithomelang
-    - default
-    - django
+  with_items: sites
   notify:
    - reload nginx
   tags: [configuration,nginx]
