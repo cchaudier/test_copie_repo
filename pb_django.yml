@@ -1,13 +1,15 @@
 # danjo.yml
 ---
 - hosts: all
-  vars:
-    common_hostname: 'django-server'
   sudo: yes
+  vars:
   vars_files:
     - nginx-vars.yml
+    - env_vars/base.yml
+    - env_vars/dev.yml
   roles:
     #- common
     #- python-common
     #- nginx
-    - nginx-cosmo
+    #- nginx-cosmo
+    - gunicorn

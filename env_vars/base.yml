@@ -1,0 +1,22 @@
+---
+
+common_hostname: 'django-server'
+
+git_repo: https://github.com/cosmopolithome/cosmoserver.git
+application_name: 'cosmoserver'
+app_user: 'cosmo'
+app_group: "{{ app_user }}"
+env: 'dev'
+
+ssl_dest_dir: /etc/ssl
+
+ssl_crt: |
+  -----BEGIN CERTIFICATE-----
+  -----END CERTIFICATE-----
+
+# This key is for demo purposes only. If you're committing your keys
+# to your git repo, you'd probably want it encrypted. You can use
+# ansible-vault to do this.
+ssl_key: |
+  -----BEGIN PRIVATE KEY-----
+  -----END PRIVATE KEY-----
