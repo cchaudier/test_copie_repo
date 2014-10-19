@@ -1,6 +1,9 @@
 ---
-- name: Create certis directory
-  copy: src=certs dest=/etc/nginx
+- name: Create directorys
+  copy: src={{ item }}  dest=/etc/nginx
+  with_items:
+    - certs
+    - global
   notify:
    - reload nginx
   tags: [configuration,nginx]
