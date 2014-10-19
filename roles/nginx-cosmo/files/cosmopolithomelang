@@ -1,0 +1,44 @@
+server {
+    listen 0.0.0.0;
+    server_name cosmopolithome.com;
+    server_name www.cosmopolithome.com;
+    rewrite ^ https://www.cosmopolithome.com$request_uri permanent;
+}
+
+server {
+    listen 0.0.0.0;
+    server_name de.cosmopolithome.com;
+    rewrite ^ https://de.cosmopolithome.com$request_uri permanent;
+}
+
+server {
+    listen 0.0.0.0;
+    server_name es.cosmopolithome.com;
+    rewrite ^ https://es.cosmopolithome.com$request_uri permanent;
+}
+
+server {
+    listen 0.0.0.0;
+    server_name it.cosmopolithome.com;
+    rewrite ^ https://it.cosmopolithome.com$request_uri permanent;
+}
+
+server {
+    listen 0.0.0.0;
+    server_name nl.cosmopolithome.com;
+    rewrite ^ https://nl.cosmopolithome.com$request_uri permanent;
+}
+
+server {
+    listen 0.0.0.0;
+    server_name pt.cosmopolithome.com;
+    rewrite ^ https://pt.cosmopolithome.com$request_uri permanent;
+}
+
+server {
+    listen 0.0.0.0;
+    server_name cosmopolithome.fr;
+    server_name www.cosmopolithome.fr;
+    server_name fr.cosmopolithome.com;
+    rewrite ^ https://fr.cosmopolithome.com$request_uri permanent;
+}

@@ -1,50 +1,9 @@
 server {
-    listen 0.0.0.0;
-    server_name cosmopolithome.com;
-    server_name www.cosmopolithome.com;
-    rewrite ^ https://www.cosmopolithome.com$request_uri permanent;
-}
-
-server {
-    listen 0.0.0.0;
-    server_name de.cosmopolithome.com;
-    rewrite ^ https://de.cosmopolithome.com$request_uri permanent;
-}
-
-server {
-    listen 0.0.0.0;
-    server_name es.cosmopolithome.com;
-    rewrite ^ https://es.cosmopolithome.com$request_uri permanent;
-}
-
-server {
-    listen 0.0.0.0;
-    server_name fr.cosmopolithome.com;
-    rewrite ^ https://fr.cosmopolithome.com$request_uri permanent;
-}
-
-server {
-    listen 0.0.0.0;
-    server_name it.cosmopolithome.com;
-    rewrite ^ https://it.cosmopolithome.com$request_uri permanent;
-}
-
-server {
-    listen 0.0.0.0;
-    server_name nl.cosmopolithome.com;
-    rewrite ^ https://nl.cosmopolithome.com$request_uri permanent;
-}
-
-server {
-    listen 0.0.0.0;
-    server_name pt.cosmopolithome.com;
-    rewrite ^ https://pt.cosmopolithome.com$request_uri permanent;
-}
-
-server {
+    listen 80;
     listen 443 default_server ssl;
     ssl_certificate      /etc/nginx/certs/cosmopolithome.pem;
     ssl_certificate_key  /etc/nginx/certs/cosmopolithome.key;
+    charset utf-8;
 
     index index.html;
 
@@ -60,6 +19,7 @@ server {
     client_max_body_size 15M;
     client_body_buffer_size 128k;
 
+#Gzip
     gzip on;
     gzip_buffers 16 8k;
     gzip_comp_level 9;
@@ -69,32 +29,25 @@ server {
     gzip_vary on;
     gzip_disable 'MSIE [1-6].(?!.*SV1)';
 
-    location ^~ /assets/ {
-        root /home/cosmo/cosmo_client/public;
-    }
-
     location ~ ^/(media|static)/ {
-        root /home/cosmo/cosmo_server/site_media;
+        alias http://media.cosmopolithome.com;
     }
 
+    location ^~ /assets/ {
+        alias http://media.cosmopolithome.com/public/assets;
+    }
+
+    #TODO a suprimmer
     location ~ ^/(favicon.ico|robots.txt|2862CFB530620E57EBBAFA13474F48AE.txt|googlece3814a7713d4a87.html)$ {
-        root /home/cosmo/cosmo_client/public/assets;
+        root http://media.cosmopolithome.com/public/assets;
     }
 
     location ~ ^/(api|admin)/ {
         proxy_pass http://django;
+        #TODO externaliser vers proxy.conf
         proxy_set_header Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Protocol https;
     }
-
-#    location / {
-#        proxy_pass http://phantomjs;
-#        proxy_set_header Host $http_host;
-#        proxy_set_header X-Real-IP $remote_addr;
-#        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-#        proxy_set_header X-Forwarded-Protocol https;
-#        expires -1;
-#    }
 }
