@@ -1,0 +1,30 @@
+---
+
+# Application settings.
+virtualenv_path: "/home/{{ app_user }}/{{ application_name }}"
+project_path: "{{ virtualenv_path }}"
+application_path: "{{ project_path }}"
+application_log_dir: "/var/log/{{ application_name }}"
+application_log_file_base: "{{ application_log_dir }}/supervisor-gunicorn"
+logs:
+  - log
+  - err
+requirements_dir: "{{ project_path }}/requirements"
+requirements_file: "{{ requirements_dir }}/{{ env }}.txt"
+
+
+# Gunicorn settings
+gunicorn_user: "{{ app_user }}"
+gunicorn_group: "{{ app_group }}"
+gunicorn_num_workers: "{{ ansible_processor_vcpus }}"
+
+# Django Environment variables
+django_environment:
+  DJANGO_SETTINGS_MODULE: "{{ django_settings_file }}"
+  DJANGO_SECRET_KEY: "{{ django_secret_key }}"
+  EMAIL_HOST: "{{ smtp_host }}"
+  EMAIL_HOST_USER: "{{ smtp_user }}"
+  EMAIL_HOST_PASSWORD: "{{ smtp_password }}"
+  DATABASE_USER: "{{ db_user }}"
+  DATABASE_PASSWORD: "{{ db_password }}"
+  
