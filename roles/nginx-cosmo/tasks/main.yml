@@ -3,6 +3,7 @@
   copy: src={{ item }}  dest=/etc/nginx
   with_items:
     - certs
+    - global
   notify:
    - reload nginx
   tags: [configuration,nginx]
@@ -13,9 +14,15 @@
    - reload nginx
   tags: [configuration,nginx]
 
+- name: Create global conf
+  template: src=global/{{ item }}.j2 dest=/etc/nginx/global/{{ item }}
+  with_items: globals
+  notify:
+   - reload nginx
+  tags: [configuration,nginx]
+
 - name: Create the configurations for sites
   template: src=sites-available/{{ item }}.conf.j2 dest=/etc/nginx/sites-available/{{ item }}.conf
-  #copy: src={{ item }} dest=/etc/nginx/sites-available/{{ item }}.conf
   with_items: sites
   notify:
    - reload nginx

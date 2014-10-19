@@ -5,6 +5,11 @@ sites:
   - default
   - django
 
+globals:
+  - prerenderio
+
 base_url: cosmopolithome.com
 media_url: http://media.cosmopolithome.com
 media_url: http://media.cosmopolithome.local
+
+prerender_token: yMXuziDPSih49x32QYe2

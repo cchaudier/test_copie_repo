@@ -3,7 +3,7 @@ location / {
 }
  
 location @prerender {
-        proxy_set_header X-Prerender-Token yMXuziDPSih49x32QYe2;
+        proxy_set_header X-Prerender-Token {{ prerender_token }};
  
         set $prerender 0;
         if ($http_user_agent ~* "baiduspider|twitterbot|facebookexternalhit|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest|slackbot|googlebot|yahoo|bingbot|yandex|yeti|yodaobot|gigabot|ia_archiver|developers\.google\.com") {
@@ -27,6 +27,6 @@ location @prerender {
             proxy_pass http://$prerender;
         }
         if ($prerender = 0) {
-            rewrite .* http://media.cosmopolithome.com/index.html break;
+            rewrite .* {{ media_url }}/index.html break;
         }
 }
