@@ -6,6 +6,7 @@ SOCKFILE={{ virtualenv_path }}/run/gunicorn.sock
 USER={{ gunicorn_user }}
 GROUP={{ gunicorn_group }}
 NUM_WORKERS={{ gunicorn_num_workers }}
+LOG_LEVEL={{ gunicorn_log_level }}
 
 # Set this to 0 for unlimited requests. During development, you might want to
 # set this to 1 to automatically restart the process on each request (i.e. your
@@ -32,6 +33,6 @@ exec gunicorn \
     --workers $NUM_WORKERS \
     --max-requests $MAX_REQUESTS \
     --user $USER --group $GROUP \
-    --log-level debug \
+    --log-level $LOG_LEVEL \
     --bind unix:$SOCKFILE \
     {{ application_name }}.wsgi

@@ -1,12 +1,11 @@
 ---
 
-common_hostname: 'django-server'
-
-git_repo: https://github.com/cosmopolithome/cosmoserver.git
+git_repo: 'git@github.com:cosmopolithome/cosmoserver.git'
 application_name: 'cosmoserver'
+project_name: 'cosmopolithome'
 app_user: 'cosmo'
 app_group: "{{ app_user }}"
-env: 'dev'
+env_type: 'dev'
 
 ssl_dest_dir: /etc/ssl
 
@@ -20,3 +19,5 @@ ssl_crt: |
 ssl_key: |
   -----BEGIN PRIVATE KEY-----
   -----END PRIVATE KEY-----
+
+common_hostname: "{{ env_type }}-{{ project_name }}-django-server"

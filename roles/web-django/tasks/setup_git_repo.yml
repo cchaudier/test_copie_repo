@@ -1,6 +1,9 @@
 ---
 
 - name: Setup the Git repo
-  git: repo={{ git_repo }} dest={{ project_path }} accept_hostkey=yes
+  sudo_user: "{{ app_user }}"   
+  git: repo={{ git_repo }} dest={{ git_project_path }} 
+       accept_hostkey=yes
+       key_file="/home/{{ app_user }}/.ssh/id_rsa"
   when: setup_git_repo
   tags: git

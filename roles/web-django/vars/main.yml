@@ -1,16 +1,15 @@
 ---
 
 # Application settings.
-virtualenv_path: "/home/{{ app_user }}/{{ application_name }}"
-project_path: "{{ virtualenv_path }}"
-application_path: "{{ project_path }}"
+virtualenv_path: "/home/{{ app_user }}/.virtualenvs/{{ application_name }}"
+git_project_path: "/home/{{ app_user }}/{{ application_name }}"
 application_log_dir: "/var/log/{{ application_name }}"
 application_log_file_base: "{{ application_log_dir }}/supervisor-gunicorn"
 logs:
   - log
   - err
-requirements_dir: "{{ project_path }}/requirements"
-requirements_file: "{{ requirements_dir }}/{{ env }}.txt"
+requirements_dir: "{{ git_project_path }}/requirements"
+requirements_file: "{{ requirements_dir }}/{{ env_type }}.txt"
 
 
 # Gunicorn settings

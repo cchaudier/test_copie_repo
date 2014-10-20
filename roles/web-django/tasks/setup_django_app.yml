@@ -1,7 +1,8 @@
 ---
 
-- name: Install packages required by the Django app inside virtualenv
-  pip: virtualenv={{ virtualenv_path }} requirements={{ requirements_file }}
+- name: create virtualenv and install requirements into virtualenv 
+  sudo_user: "{{ app_user }}"
+  raw: "( cd && source virtualenvwrapper.sh && mkvirtualenv {{ application_name }} && workon {{ application_name }} && add2virtualenv {{ application_name }} && pip install -r {{ requirements_file }})>/home/{{ app_user }}/require.log"
 
 - name: Run the Django syncdb command
   django_manage:
@@ -32,6 +33,3 @@
   environment: django_environment
   when: run_django_collectstatic
   tags: django
-
-
-
