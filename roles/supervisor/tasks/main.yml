@@ -1,0 +1,15 @@
+- name: install supervisor
+  apt: pkg=supervisor state=present update_cache=true
+
+- include: supervisor-task.yml
+  vars:
+    name: 
+    command: 
+    directory: 
+    user: 
+
+- name: update supervisor
+  command: "{{ supervisorctl_command }} update"
+
+- name: restart task {{ name }}
+  command: "{{ supervisorctl_command }} restart {{ name }}:*"

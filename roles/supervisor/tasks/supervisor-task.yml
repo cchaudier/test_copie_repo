@@ -1,0 +1,2 @@
+- name: installing task {{ name }}
+  template: src=task.conf.j2 dest={{ supervisor_config_dir }}/{{ name }}.conf
