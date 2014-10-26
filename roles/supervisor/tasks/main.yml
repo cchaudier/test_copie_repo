@@ -1,15 +1,19 @@
 - name: install supervisor
   apt: pkg=supervisor state=present update_cache=true
+  sudo: yes
 
-- include: supervisor-task.yml
-  vars:
-    name: 
-    command: 
-    directory: 
-    user: 
+- name: installing task {{ name }}
+  template: src=task.conf.j2 dest={{ supervisor_config_dir }}/{{ name }}.conf
+  sudo: yes
+
+- name: stop service {{ name }}
+  service: name={{ name }} state=stopped
+  sudo: yes
 
 - name: update supervisor
   command: "{{ supervisorctl_command }} update"
+  sudo: yes
 
 - name: restart task {{ name }}
   command: "{{ supervisorctl_command }} restart {{ name }}:*"
+  sudo: yes
