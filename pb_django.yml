@@ -8,9 +8,9 @@
     - env_vars/base.yml
     - env_vars/dev.yml
   roles:
-    #- common
-    #- python-common
-    #- nginx
-    #- nginx-cosmo
-    #- web-django
-    - { role: supervisor, name: nginx, command: /usr/sbin/nginx, directory: /usr/sbin, user: root, stopsignal: HUP }
+    - common
+    - python-common
+    - nginx
+    - nginx-cosmo
+    - web-django
+    - supervisor

@@ -6,6 +6,8 @@ project_name: 'cosmopolithome'
 app_user: 'cosmo'
 app_group: "{{ app_user }}"
 env_type: 'dev'
+virtualenv_path: "/home/{{ app_user }}/.virtualenvs/{{ application_name }}"
+git_project_path: "/home/{{ app_user }}/{{ application_name }}"
 
 ssl_dest_dir: /etc/ssl
 

@@ -1,19 +1,18 @@
 - name: install supervisor
   apt: pkg=supervisor state=present update_cache=true
-  sudo: yes
 
-- name: installing task {{ name }}
-  template: src=task.conf.j2 dest={{ supervisor_config_dir }}/{{ name }}.conf
-  sudo: yes
+- name: installing tasks
+  copy: src={{ item }}.conf dest={{ supervisor_config_dir }}
+  with_items: tasks
 
-- name: stop service {{ name }}
-  service: name={{ name }} state=stopped
-  sudo: yes
+- name: stop services
+  service: name={{ item }} state=stopped
+  with_items:
+    - nginx
 
 - name: update supervisor
   command: "{{ supervisorctl_command }} update"
-  sudo: yes
 
-- name: restart task {{ name }}
-  command: "{{ supervisorctl_command }} restart {{ name }}:*"
-  sudo: yes
+- name: restart tasks
+  command: "{{ supervisorctl_command }} restart {{ item }}:*"
+  with_items: tasks

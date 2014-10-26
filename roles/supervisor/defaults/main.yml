@@ -6,3 +6,6 @@ autostart: "true"
 env_vars: {}
 numprocs: 1
 process_name: "%(program_name)s_%(process_num)02d"
+tasks:
+  - nginx
+  - cosmoserver
