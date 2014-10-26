@@ -10,6 +10,9 @@
   with_items:
     - nginx
 
+- name: create log dir
+  file: path={{ application_log_dir }} state=directory
+
 - name: update supervisor
   command: "{{ supervisorctl_command }} update"
 

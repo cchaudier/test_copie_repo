@@ -2,6 +2,8 @@
 
 git_repo: 'git@github.com:cosmopolithome/cosmoserver.git'
 application_name: 'cosmoserver'
+application_log_dir: "/var/log/{{ application_name }}"
+application_log_file_base: "{{ application_log_dir }}/supervisor-gunicorn"
 project_name: 'cosmopolithome'
 app_user: 'cosmo'
 app_group: "{{ app_user }}"

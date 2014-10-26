@@ -1,5 +1,8 @@
 ---
 
+- name: create log dir
+  file: path={{ application_log_dir }} state=directory
+
 - name: Create the application log files
   command: touch "{{ application_log_file_base }}-{{ item }}.log"
            creates="{{ application_log_file_base }}-{{ item }}.log"
