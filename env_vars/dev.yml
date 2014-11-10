@@ -9,6 +9,11 @@ db_user: "{{ app_user }}"
 db_name: "{{ app_user }}"
 db_password: password
 
+#REDIS
+redis_host: "cosmo-redis.yompsh.0001.euw1.cache.amazonaws.com"
+redis_port: "6379"
+redis_password:
+
 
 # Gunicorn settings. For the number of workers, a good rule to follow is
 # 2 x number of CPUs + 1
