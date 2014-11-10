@@ -12,6 +12,8 @@
 
 - name: create log dir
   file: path={{ application_log_dir }} state=directory
+        owner={{ gunicorn_user }}
+        group={{ gunicorn_group }}
 
 - name: update supervisor
   command: "{{ supervisorctl_command }} update"
@@ -19,3 +21,4 @@
 - name: restart tasks
   command: "{{ supervisorctl_command }} restart {{ item }}:*"
   with_items: tasks
+  
