@@ -4,6 +4,12 @@
   sudo_user: "{{ app_user }}"
   raw: "( cd && source virtualenvwrapper.sh && mkvirtualenv {{ application_name }} && workon {{ application_name }} && add2virtualenv {{ application_name }} && pip install -r {{ requirements_file }})>/home/{{ app_user }}/require.log"
 
+- name: Create Django conf
+  template: src=settings.j2 dest={{ git_project_path }}/settings/config.json
+    owner={{ app_user }}
+    group={{ app_user }}
+    mode=0400
+
 - name: Run the Django syncdb command
   django_manage:
     command: syncdb
