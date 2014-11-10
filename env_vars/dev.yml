@@ -31,10 +31,14 @@ smtp_user: admin@example.com
 smtp_password: mypassword
 
 # Application settings.
-django_settings_file: settings.dev
+django_settings_file: config.json
 django_secret_key: _e@do%6+-f)s&xd$z17y2a_7&%t3+*kpt8s+gcosrpj6r1$k$0
 
 run_django_syncdb: no
 run_django_south_migration: no
 run_django_collectstatic: no
 setup_git_repo: yes
+
+base_url: cosmopolithome.{{ env_type }}
+media_url: "http://media.{{ base_url }}"
+prerender_token: yMXuziDPSih49x32QYe2
