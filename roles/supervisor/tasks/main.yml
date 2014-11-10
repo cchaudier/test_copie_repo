@@ -2,7 +2,7 @@
   apt: pkg=supervisor state=present update_cache=true
 
 - name: installing tasks
-  copy: src={{ item }}.conf dest={{ supervisor_config_dir }}
+  template: src={{ item }}.conf.j2 dest={{ supervisor_config_dir }}/{{ item }}.conf
   with_items: tasks
 
 - name: stop services
