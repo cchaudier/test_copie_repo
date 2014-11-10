@@ -1,5 +1,8 @@
 ---
 
+- name: Stop supervisor
+  command: "supervisorctl stop all"
+
 - name: create virtualenv and install requirements into virtualenv 
   sudo_user: "{{ app_user }}"
   raw: "( cd && source virtualenvwrapper.sh && mkvirtualenv {{ application_name }} && workon {{ application_name }} && add2virtualenv {{ application_name }} && pip install -r {{ requirements_file }})>/home/{{ app_user }}/require.log"
@@ -9,6 +12,11 @@
     owner={{ app_user }}
     group={{ app_user }}
     mode=0400
+
+- name: Create virtual env postactivate
+  template: src=virtualenv_postactivate.j2 dest={{ virtualenv_path }}/bin/postactivate
+    owner={{ app_user }}
+    group={{ app_user }}
 
 - name: Run the Django syncdb command
   django_manage:
