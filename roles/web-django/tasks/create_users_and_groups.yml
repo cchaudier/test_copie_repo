@@ -29,7 +29,7 @@
         group={{ gunicorn_group }}
         mode=0600
 
-- name: Add user profil
+- name: Add user profile
   template: src=profile.j2 dest=/home/{{ gunicorn_user }}/.profile
         owner={{ gunicorn_user }}
         group={{ gunicorn_group }}
