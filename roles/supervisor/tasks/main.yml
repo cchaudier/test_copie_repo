@@ -1,3 +1,9 @@
+---
+#- name: stop services
+#  service: name={{ item }} state=stopped enabled=no
+#  with_items:
+#    - nginx
+
 - name: install supervisor
   apt: pkg=supervisor state=present update_cache=true
 
@@ -7,11 +13,6 @@
 
 #- name: Disable Nginx on startup
 #  raw: "update-rc.d -f nginx disable && mv /etc/init.d/nginx /etc/init.d/nginx_disabled"
-
-#- name: stop nginx
-#  service: name={{ item }} state=stopped enabled=no
-#  with_items:
-  #    - nginx
 
 - name: create log dir
   file: path={{ application_log_dir }} state=directory
@@ -27,4 +28,3 @@
 - name: restart tasks
   command: "{{ supervisorctl_command }} restart {{ item }}:*"
   with_items: tasks
-  
