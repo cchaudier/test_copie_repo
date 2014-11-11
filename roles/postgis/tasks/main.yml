@@ -1,8 +1,11 @@
 ---
-- name: Install posgresql client
+- name: Install dependences
   apt: name={{item}} state=present
   with_items:
     - postgresql-client
+    - binutils
+    - libproj-dev
+    - gdal-bin
 
 - name: Create pgpass file
   template: src=pgpass.j2 dest=/home/{{ app_user }}/.pgpass
