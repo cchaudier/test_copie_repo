@@ -24,6 +24,13 @@
     group={{ app_user }}
     mode=0400
 
+#TODO PR for requiments postgis not on the same machine
+- name: install module pip
+  sudo_user: "{{ app_user }}"
+  raw: "source $(which virtualenvwrapper.sh) && workon {{ application_name }} && pip install {{ item }}"
+  with_items:
+      - httplib2
+
 - name: Run the Django syncdb command
   django_manage:
     command: syncdb
