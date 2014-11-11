@@ -6,9 +6,9 @@ git_project_path: "/home/{{ app_user }}/{{ application_name }}"
 application_log_dir: "/var/log/{{ application_name }}"
 application_log_file_base: "{{ application_log_dir }}/supervisor-gunicorn"
 logs:
-  - log
+  - out
   - err
-settings_dir: "{{ git_project_path }}/settings"
+settings_dir: "{{ git_project_path }}/{{ project_name }}/settings"
 requirements_dir: "{{ git_project_path }}/requirements"
 requirements_file: "{{ requirements_dir }}/{{ env_type }}.txt"
 
@@ -18,9 +18,10 @@ gunicorn_group: "{{ app_group }}"
 gunicorn_num_workers: "{{ ansible_processor_vcpus }}"
 
 # Django Environment variables
+django_settings_file: "{{ project_name }}.settings.{{ env_type }}"
 django_environment:
   DJANGO_SETTINGS_MODULE: "{{ django_settings_file }}"
-  DJANGO_SECRET_KEY: "{{ django_secret_key }}"
+  #  DJANGO_SECRET_KEY: "{{ django_secret_key }}"
   EMAIL_HOST: "{{ smtp_host }}"
   EMAIL_HOST_USER: "{{ smtp_user }}"
   EMAIL_HOST_PASSWORD: "{{ smtp_password }}"

@@ -29,15 +29,15 @@ smtp_user: admin@example.com
 smtp_password: mypassword
 
 # Application settings.
-django_settings_file: config.json
 django_secret_key: _e@do%6+-f)s&xd$z17y2a_7&%t3+*kpt8s+gcosrpj6r1$k$0
 
-run_django_syncdb: no
-run_django_south_migration: no
-run_django_collectstatic: no
+run_django_syncdb: yes
+run_django_south_migration: yes
+run_django_collectstatic: yes
 setup_git_repo: yes
 
 aws_eip: 54.76.24.32
 base_url: "{{ aws_eip }}"
 media_url: "{{ aws_eip }}"
+subdom_root_url: ""
 prerender_token: yMXuziDPSih49x32QYe2

@@ -30,7 +30,6 @@ smtp_user: admin@example.com
 smtp_password: mypassword
 
 # Application settings.
-django_settings_file: config.json
 django_secret_key: _e@do%6+-f)s&xd$z17y2a_7&%t3+*kpt8s+gcosrpj6r1$k$0
 
 run_django_syncdb: no

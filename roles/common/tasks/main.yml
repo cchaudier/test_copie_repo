@@ -16,6 +16,7 @@
     - unicode-data 
     - language-pack-fr-base
     - language-pack-fr
+    - tree
     - htop
     - dfc  
     - strace

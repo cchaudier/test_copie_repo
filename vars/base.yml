@@ -28,4 +28,5 @@ common_hostname: "{{ env_type }}-{{ project_name }}-django-server"
   
 base_url: cosmopolithome.com
 media_url: "http://media.{{ base_url }}"
+subdom_root_url: "www."
 prerender_token: yMXuziDPSih49x32QYe2

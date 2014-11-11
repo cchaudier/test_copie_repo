@@ -4,14 +4,14 @@
   sudo: yes
   vars:
   vars_files:
-    - nginx-vars.yml
-    - env_vars/base.yml
-    - env_vars/spec.yml
+    - vars/nginx-vars.yml
+    - vars/base.yml
+    - vars/spec.yml
   roles:
-    - common
-    - postgis
-    - python-common
-    - nginx
-    - nginx-cosmo
+    #- common
+    #- postgis
+    #- python-common
+    #- nginx
+    #- nginx-cosmo
     - web-django
     - supervisor

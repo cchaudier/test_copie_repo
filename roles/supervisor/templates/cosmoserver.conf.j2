@@ -1,10 +1,12 @@
 [program:{{ application_name }}]
-command={{ virtualenv_path }}/bin/gunicorn --workers 5 --bind 'unix:/tmp/gunicorn-{{ application_name }}.sock' --pid '/tmp/gunicorn-{{ application_name }}.pid' --access-logfile '/var/log/{{ application_name }}/gunicorn-access.log' --error-logfile '/var/log/{{ application_name }}/gunicorn-error.log' {{ project_name }}.wsgi:application
+command={{ virtualenv_path }}/bin/gunicorn --workers 5 --bind 'unix:/tmp/gunicorn-{{ application_name }}.sock' --pid '/tmp/gunicorn-{{ application_name }}.pid' --access-logfile '{{ application_log_dir }}/gunicorn-access.log' --error-logfile '{{ application_log_dir }}/gunicorn-error.log' {{ project_name }}.wsgi:application
+stdout_logfile={{ application_log_file_base }}-out.log
+stderr_logfile={{ application_log_file_base }}-err.log
 process_name=%(program_name)s_%(process_num)02d
 directory=/home/cosmo/{{ application_name }}
-redirect_stderr=true
 autostart=true
 autorestart=true
 user=cosmo
 numprocs=1
 stopsignal=HUP
+
