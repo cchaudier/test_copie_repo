@@ -6,7 +6,7 @@
   vars_files:
     - nginx-vars.yml
     - env_vars/base.yml
-    - env_vars/dev.yml
+    - env_vars/spec.yml
   roles:
     - common
     - postgis

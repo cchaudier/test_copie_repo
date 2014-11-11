@@ -1,6 +1,6 @@
 ---
 
-env_type: 'dev'
+env_type: 'staging'
 # Database settings.
 db_host: "cosmo-pg-rds.cickmf1tzggl.eu-west-1.rds.amazonaws.com"
 db_port: "5432"
@@ -12,7 +12,6 @@ db_password: password
 redis_host: "cosmo-redis.yompsh.0001.euw1.cache.amazonaws.com"
 redis_port: "6379"
 redis_password:
-
 
 # Gunicorn settings. For the number of workers, a good rule to follow is
 # 2 x number of CPUs + 1
@@ -38,6 +37,7 @@ run_django_south_migration: no
 run_django_collectstatic: no
 setup_git_repo: yes
 
-base_url: cosmopolithome.{{ env_type }}
-media_url: "http://media.{{ base_url }}"
+aws_eip: 54.76.24.32
+base_url: "{{ aws_eip }}"
+media_url: "{{ aws_eip }}"
 prerender_token: yMXuziDPSih49x32QYe2
