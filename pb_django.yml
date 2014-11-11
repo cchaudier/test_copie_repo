@@ -9,7 +9,6 @@
     - vars/spec.yml
   roles:
     - common
-    - postgis
     - python-common
     - nginx
     - nginx-cosmo
