@@ -8,10 +8,10 @@
     - vars/base.yml
     - vars/spec.yml
   roles:
-    #- common
-    #- postgis
-    #- python-common
-    #- nginx
-    #- nginx-cosmo
+    - common
+    - postgis
+    - python-common
+    - nginx
+    - nginx-cosmo
     - web-django
     - supervisor
