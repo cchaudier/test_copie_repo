@@ -8,9 +8,9 @@ application_log_file_base: "{{ application_log_dir }}/supervisor-gunicorn"
 logs:
   - log
   - err
+settings_dir: "{{ git_project_path }}/settings"
 requirements_dir: "{{ git_project_path }}/requirements"
 requirements_file: "{{ requirements_dir }}/{{ env_type }}.txt"
-
 
 # Gunicorn settings
 gunicorn_user: "{{ app_user }}"
