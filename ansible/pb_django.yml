@@ -1,0 +1,16 @@
+# danjo.yml
+---
+- hosts: all
+  sudo: yes
+  vars:
+  vars_files:
+    - vars/nginx-vars.yml
+    - vars/base.yml
+    - vars/spec.yml
+  roles:
+    - common
+    - python-common
+    - nginx
+    - nginx-cosmo
+    - web-django
+    - supervisor

@@ -1,0 +1,32 @@
+location / {
+        try_files $uri @prerender;
+}
+ 
+location @prerender {
+        proxy_set_header X-Prerender-Token {{ prerender_token }};
+ 
+        set $prerender 0;
+        if ($http_user_agent ~* "baiduspider|twitterbot|facebookexternalhit|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest|slackbot|googlebot|yahoo|bingbot|yandex|yeti|yodaobot|gigabot|ia_archiver|developers\.google\.com") {
+            set $prerender 1;
+        }
+        if ($args ~ "_escaped_fragment_|prerender=1") {
+            set $prerender 1;
+        }
+        if ($http_user_agent ~ "Prerender") {
+            set $prerender 0;
+        }
+ 
+        if ($prerender = 1) {
+            #resolve using Google's DNS server
+            #resolver 8.8.8.8;
+            
+            #setting prerender as a variable forces DNS resolution since nginx
+            #caches IPs and doesnt play well with load balancing
+            set $prerender "service.prerender.io";
+            rewrite .* /$scheme://$server_name$request_uri? break;
+            proxy_pass http://$prerender;
+        }
+        if ($prerender = 0) {
+            rewrite .* {{ media_url }}/index.html break;
+        }
+}

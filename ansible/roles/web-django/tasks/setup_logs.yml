@@ -1,0 +1,17 @@
+---
+
+- name: create log dir
+  file: path={{ application_log_dir }} state=directory
+
+- name: Create the application log files
+  command: touch "{{ application_log_file_base }}-{{ item }}.log"
+           creates="{{ application_log_file_base }}-{{ item }}.log"
+  with_items: logs
+
+- name: Set permission to the application log file
+  file: path="{{ application_log_file_base }}-{{ item }}.log"
+        owner={{ gunicorn_user }}
+        group={{ gunicorn_group }}
+        mode=0664
+        state=file
+  with_items: logs

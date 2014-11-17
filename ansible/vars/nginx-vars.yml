@@ -1,0 +1,12 @@
+---
+# can be defined here.
+nginx_http_params:
+  - access_log "{{nginx_log_dir}}/access.log"
+  - error_log "{{nginx_log_dir}}/error.log"
+
+nginx_sites:
+ default:
+     - listen 80
+     - server_name django_server
+     - root "/var/www"
+     - index index.html index.htm
