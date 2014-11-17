@@ -1,5 +1,5 @@
 [program:{{ application_name }}]
-command={{ virtualenv_path }}/bin/gunicorn --workers 5 --bind 'unix:/tmp/gunicorn-{{ application_name }}.sock' --pid '/tmp/gunicorn-{{ application_name }}.pid' --access-logfile '{{ application_log_dir }}/gunicorn-access.log' --error-logfile '{{ application_log_dir }}/gunicorn-error.log' {{ project_name }}.wsgi:application
+command={{ virtualenv_path }}/bin/start_gunicorn.sh
 stdout_logfile={{ application_log_file_base }}-out.log
 stderr_logfile={{ application_log_file_base }}-err.log
 process_name=%(program_name)s_%(process_num)02d
