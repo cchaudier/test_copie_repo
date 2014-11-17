@@ -40,7 +40,7 @@ server {
 
     #TODO a suprimmer
     location ~ ^/(favicon.ico|robots.txt|2862CFB530620E57EBBAFA13474F48AE.txt|googlece3814a7713d4a87.html)$ {
-        root {{ media_url }}/public/assets;
+        alias {{ media_url }}/public/assets;
     }
 
     location ~ ^/(api|admin)/ {

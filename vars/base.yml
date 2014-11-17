@@ -7,9 +7,9 @@ application_log_file_base: "{{ application_log_dir }}/supervisor-gunicorn"
 project_name: 'cosmopolithome'
 app_user: 'cosmo'
 app_group: "{{ app_user }}"
-env_type: 'dev'
 virtualenv_path: "/home/{{ app_user }}/.virtualenvs/{{ application_name }}"
 git_project_path: "/home/{{ app_user }}/{{ application_name }}"
+application_path: "{{ git_project_path }}"
 
 ssl_dest_dir: /etc/ssl
 
@@ -25,3 +25,8 @@ ssl_key: |
   -----END PRIVATE KEY-----
 
 common_hostname: "{{ env_type }}-{{ project_name }}-django-server"
+  
+base_url: cosmopolithome.com
+media_url: "http://media.{{ base_url }}"
+subdom_root_url: "www."
+prerender_token: yMXuziDPSih49x32QYe2

@@ -4,9 +4,9 @@
   sudo: yes
   vars:
   vars_files:
-    - nginx-vars.yml
-    - env_vars/base.yml
-    - env_vars/dev.yml
+    - vars/nginx-vars.yml
+    - vars/base.yml
+    - vars/spec.yml
   roles:
     - common
     - python-common

@@ -1,4 +1,4 @@
 #hosts
 [staging]
-54.76.24.32    ansible_ssh_user=ubuntu
+54.72.28.111    ansible_ssh_user=ubuntu
 
