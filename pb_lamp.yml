@@ -1,8 +1,0 @@
-# playbook.yml
----
-- hosts: all
-  sudo: yes
-  roles:
-    - common
-    #- webserver
-    #- database

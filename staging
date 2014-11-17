@@ -1,4 +1,0 @@
-#hosts
-[staging]
-54.72.28.111    ansible_ssh_user=ubuntu
-

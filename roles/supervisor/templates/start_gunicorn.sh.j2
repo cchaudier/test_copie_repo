@@ -1,4 +1,0 @@
-#!/bin/sh
-. {{ virtualenv_path }}/bin/postactivate
-{{ virtualenv_path }}/bin/gunicorn --workers 5 --bind 'unix:/tmp/gunicorn-{{ application_name }}.sock' --pid '/tmp/gunicorn-{{ application_name }}.pid' --access-logfile '{{ application_log_dir }}/gunicorn-access.log' --error-logfile '{{ application_log_dir }}/gunicorn-error.log' {{ project_name }}.wsgi:application
-
