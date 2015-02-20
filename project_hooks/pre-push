@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+do_exit(){
+  echo $policy
+  exit 1
+}
+
+protected_branches="develop master"
+for protected_branch in $protected_branches; do
+  policy='[Policy] Never push, force push or delete the '$protected_branch' branch! (Prevented with pre-push hook.)'
+  current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+  push_command=$(ps -ocommand= -p $PPID)
+  is_destructive='force|delete|\-f'
+  will_remove_protected_branch=':'$protected_branch
+
+  if [[ $push_command =~ $is_destructive ]] && [[ $push_command == $protected_branch ]]; then
+    do_exit
+  fi
+
+  if [[ $push_command =~ $will_remove_protected_branch ]]; then
+    do_exit
+  fi
+
+  if [[ $push_command =~ $is_destructive ]] && [[ $protected_branch == $current_branch ]]; then
+    do_exit
+  fi
+
+done
+exit 0
